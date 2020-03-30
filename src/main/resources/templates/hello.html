@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>런드리 익스프레스 실시간 현황</title>
+
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/4.4.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>-->
+<!--    <link rel="stylesheet" th:href="@{/css/main.css}"/>-->
+</head>
+<body>
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">-->
+<!--    <a class="navbar-brand" href="#">Mkyong.com</a>-->
+<!--</nav>-->
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>런드리 익스프레스 실시간 현황</h1>
+        <!--    <tr th:each="store : ${stores}">-->
+        <!--        <td th:text="${store.storeId}">storeId</td>-->
+        <!--        <td th:text="${store.storeName}">storeName</td>-->
+        <!--        <td th:text="${store.contractType}">contractType</td>-->
+        <!--    </tr>-->
+        <select class="select" name="itemId" id="itemId">
+            <option value="0">ALL</option>
+            <option th:each="store : ${stores}" th:value="${store.storeId}" th:text="${store.storeName}"></option>
+        </select>
+        <h1>
+            <!-- include image from static resources -->
+            <img alt="memory not found logo" src="../static/img/24283C3858F778CA2E.jpg" th:src="@{/img/24283C3858F778CA2E.jpg}"/><br/>
+            Adding Static Resources (css, JavaScript, Images) to Thymeleaf
+        </h1>
+    </div>
+
+    <!-- include javascript in the footer -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js/}"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../js/main.js" th:src="@{/js/main.js}"></script>
+
+</main>
+</body>
+</html>

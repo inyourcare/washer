@@ -39,7 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/authenticate",
             "/v0/auth/**",
             // test
-            "/v0/test/**"
+            "/v0/test/**",
+            // view
+            "/view/**",
+            "/resources/**",
+            "/js/**", "/css/**", "/img/**", "/libs/**", "/webjars/**", "/static/**", "/favicon.ico"
     };
 
     @Autowired

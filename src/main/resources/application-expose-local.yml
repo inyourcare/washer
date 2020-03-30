@@ -13,3 +13,10 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+    order: 0
