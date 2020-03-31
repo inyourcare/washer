@@ -5,8 +5,12 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/sock/subscribe', function (greeting) {
-            console.log(greeting);
+        stompClient.subscribe('/sock/subscribe', function (washers) {
+            var washersBody = washers.body;
+            console.log(JSON.parse(washersBody));
+
+            var washers = JSON.parse(washersBody);
+            drawFunction(washers);
         });
     });
 }
@@ -19,7 +23,8 @@ function disconnect() {
 }
 
 function refresh() {
-    stompClient.send("/app/refresh", {}, JSON.stringify({'name': $("#name").val()}));
+//    stompClient.send("/app/refresh", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/refresh", {}, null);
 }
 
 $(function () {
