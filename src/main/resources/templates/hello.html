@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>런드리 익스프레스 실시간 현황</title>
 
-    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/4.4.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
-<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/main.css}"/>-->
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/4.4.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/main.css}"/>-->
 </head>
 <body>
 <!--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">-->
@@ -23,21 +24,95 @@
         <!--        <td th:text="${store.storeName}">storeName</td>-->
         <!--        <td th:text="${store.contractType}">contractType</td>-->
         <!--    </tr>-->
-        <select class="select" name="itemId" id="itemId">
+        <select class="select" name="store_selector" id="store_selector">
             <option value="0">ALL</option>
             <option th:each="store : ${stores}" th:value="${store.storeId}" th:text="${store.storeName}"></option>
         </select>
+        <div id="table_div">
+            <table id="washer_table">
+                <thead id="thead">
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
         <h1>
             <!-- include image from static resources -->
-            <img alt="memory not found logo" src="../static/img/24283C3858F778CA2E.jpg" th:src="@{/img/24283C3858F778CA2E.jpg}"/><br/>
-            Adding Static Resources (css, JavaScript, Images) to Thymeleaf
+            <img alt="memory not found logo" src="../static/img/puppy-1207818_960_720.jpg"
+                 th:src="@{/img/puppy-1207818_960_720.jpg}"/>
+            <img alt="memory not found logo" src="../static/img/green_btn.png" th:src="@{/img/green_btn.png}"
+                 style="width: 10px; height: 10px;" id="green_btn"/>
+            <img alt="memory not found logo" src="../static/img/red_btn.png" th:src="@{/img/red_btn.png}"
+                 style="width: 10px; height: 10px;" id="red_btn"/>
         </h1>
     </div>
 
     <!-- include javascript in the footer -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js/}"></script>
-    <script type="text/javascript" src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" src="../js/main.js" th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.4.1/jquery.min.js/}"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    <!--    <script type="text/javascript" src="../js/main.js" th:src="@{/js/main.js}"></script>-->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var stores = [[${stores}]];
+        var washers = [[${washers}]];
+        console.log(stores);
+        console.log(washers);
+
+        var selector = $("#store_selector");
+        selector.on("change", function(){
+            var greenBtn = $('#green_btn').clone();
+            var redBtn = $('#red_btn').clone();
+            var thead = $("#thead");
+            var tbody = $("#tbody");
+            thead.empty();
+            tbody.empty();
+
+            var tr = $('<tr></tr>');
+            tr.append('<td>사용가능</td>');
+            tr.append('<td>용도</td>');
+            tr.append('<td>크기</td>');
+            tr.append('<td>기기명</td>');
+            thead.append(tr);
+
+            var selected_store_id = $("#store_selector option:selected").val();
+
+            for(var i=0; i<washers.length; i++){
+                if(washers[i].store.storeId == selected_store_id){
+                    var tr = $('<tr></tr>');
+                    var storeId = washers[i].store.storeId;
+                    var isAvailable = washers[i].isAvailable;
+                    var role = washers[i].role;
+                    if (role == 'W')
+                        role = '세탁기';
+                    else if (role == 'D')
+                        role = '건조기';
+                    var capacity = washers[i].capacity;
+                    if (capacity == 'M')
+                        role = '중형';
+                    else if (capacity == 'L')
+                        role = '대형';
+                    else if (capacity == 'E')
+                        role = '특대형';
+                    var washerName = washers[i].washerName;
+                    // tr.append('<td>'+storeId+'</td>');
+                    var td = $('<td></td>');
+                    if (isAvailable)
+                        td.append(greenBtn.clone());
+                    else
+                        td.append(redBtn.clone());
+                    tr.append(td);
+                    tr.append('<td>'+role+'</td>');
+                    tr.append('<td>'+capacity+'</td>');
+                    tr.append('<td>'+washerName+'</td>');
+                    tbody.append(tr);
+                }
+            }
+        });
+        /*]]>*/
+
+    </script>
 
 </main>
 </body>

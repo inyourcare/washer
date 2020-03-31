@@ -63,4 +63,8 @@ public class WasherEntity {
         this.regDate = regDate;
         this.modDate = modDate;
     }
+
+    public boolean getIsAvailable() {
+        return isAvailable;
+    }
 }
