@@ -7,7 +7,7 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/sock/subscribe', function (washers) {
             var washersBody = washers.body;
-            console.log(JSON.parse(washersBody));
+//            console.log(JSON.parse(washersBody));
 
             var washers = JSON.parse(washersBody);
             drawFunction(washers);
