@@ -30,8 +30,8 @@ public class ViewController {
         return "index";
     }
 
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
+    @MessageMapping("/refresh")
+    @SendTo("/sock/subscribe")
     public List<WasherEntity> greeting() throws Exception {
         Thread.sleep(1000); // simulated delay
         return washerRepository.findAll();
