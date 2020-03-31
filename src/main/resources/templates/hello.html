@@ -41,9 +41,9 @@
             <img alt="memory not found logo" src="../static/img/puppy-1207818_960_720.jpg"
                  th:src="@{/img/puppy-1207818_960_720.jpg}"/>
             <img alt="memory not found logo" src="../static/img/green_btn.png" th:src="@{/img/green_btn.png}"
-                 style="width: 10px; height: 10px;" id="green_btn"/>
+                 style="width: 10px; height: 10px; visibility: hidden;" id="green_btn"/>
             <img alt="memory not found logo" src="../static/img/red_btn.png" th:src="@{/img/red_btn.png}"
-                 style="width: 10px; height: 10px;" id="red_btn"/>
+                 style="width: 10px; height: 10px; visibility: hidden" id="red_btn"/>
         </h1>
     </div>
 
@@ -64,6 +64,8 @@
         selector.on("change", function(){
             var greenBtn = $('#green_btn').clone();
             var redBtn = $('#red_btn').clone();
+            greenBtn.css("visibility" , "visible");
+            redBtn.css("visibility" , "visible");
             var thead = $("#thead");
             var tbody = $("#tbody");
             thead.empty();
