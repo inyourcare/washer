@@ -44,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/view/**",
             "/resources/**",
             "/js/**", "/css/**", "/img/**", "/libs/**", "/webjars/**", "/static/**", "/favicon.ico"
+
+            , "/gs-guide-websocket/**"
     };
 
     @Autowired
