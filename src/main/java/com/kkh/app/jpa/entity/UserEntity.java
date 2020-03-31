@@ -1,5 +1,6 @@
 package com.kkh.app.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class UserEntity {
 
     @NotBlank
     @Size(max = 80)
+    @JsonIgnore
     private String password;
 
     @Size(max = 80)
