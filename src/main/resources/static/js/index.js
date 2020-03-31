@@ -31,5 +31,8 @@ $(function () {
     connect();
 //    $( "#connect" ).click(function() { connect(); });
 //    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#refresh" ).click(function() { refresh(); });
+//    $( "#refresh" ).click(function() { refresh(); });
+    playAlert = setInterval(function() {
+       refresh();
+    }, 5000);
 });
